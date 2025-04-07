@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>func.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="functional-analysis-informatics-museum-collection-management-application">Functional Analysis: Informatics Museum Collection Management Application</h1>
+<h2 id="1-introduction">1. Introduction</h2>
+<p>This document outlines the functional requirements for a software application designed to manage the collection of an informatics museum. The application aims to provide a centralized tool for cataloging, organizing, and managing the various objects that constitute the collection, facilitating consultation, exhibition creation, and acquisition tracking.</p>
+<h2 id="2-goals">2. Goals</h2>
+<p>The application should achieve the following main goals:</p>
+<ul>
+<li><strong>Comprehensive Cataloging:</strong> Enable the detailed recording of every object within the collection. This ensures a complete and accurate inventory of all holdings.</li>
+<li><strong>Logical Organization:</strong> Allow for the organization of objects by category (Hardware, Publications) and subcategories. This structured approach facilitates Browse and retrieval of items.</li>
+<li><strong>Exhibit Grouping Management:</strong> Facilitate the creation and management of conceptual groupings of objects for exhibition purposes. This allows curators to easily assemble and manage the components of an exhibit.</li>
+<li><strong>Acquisition Tracking:</strong> Record and manage information related to the acquisition of new objects into the collection. This provides a clear history of how items entered the museum.</li>
+<li><strong>Efficient Search and Filtering:</strong> Offer advanced search and filtering functionalities to quickly locate specific objects or groups of objects. This is crucial for research, inventory, and exhibition planning.</li>
+<li><strong>Flexibility and Scalability:</strong> Be designed flexibly to adapt to future collection expansions and evolving management needs. This ensures the long-term usability of the application.</li>
+</ul>
+<h2 id="3-functional-requirements">3. Functional Requirements</h2>
+<h3 id="31-collection-object-management">3.1 Collection Object Management</h3>
+<p>This section describes the functionalities related to the management of individual objects within the collection.</p>
+<h4 id="311-creating-a-new-object">3.1.1 Creating a New Object</h4>
+<p>The application must allow authorized users to create a record for a new object, including the following information fields:</p>
+<ul>
+<li><strong>Unique Identifier:</strong> A system-generated or manually assigned unique code to identify the object. This ID should be immutable and serve as the primary key for the object record.
+<ul>
+<li><strong>Further Detail:</strong> The system should ideally offer an option for both automatic generation (following a defined pattern) and manual assignment (with validation to ensure uniqueness).</li>
+</ul>
+</li>
+<li><strong>Name/Title:</strong> The primary designation of the object (e.g., &quot;Apple Macintosh 128K&quot;, &quot;Byte Magazine - January 1984&quot;).
+<ul>
+<li><strong>Further Detail:</strong> Consider including fields for alternative titles or common names.</li>
+</ul>
+</li>
+<li><strong>Category:</strong> A selection field from predefined categories:
+<ul>
+<li>Hardware</li>
+<li>Publications</li>
+<li><strong>Further Detail:</strong> The system should allow administrators to manage these top-level categories if needed in the future.</li>
+</ul>
+</li>
+<li><strong>Subcategory:</strong> A selection field dependent on the selected category:
+<ul>
+<li>If Category = Hardware:
+<ul>
+<li>Computer (e.g., Desktop, Laptop, Server)</li>
+<li>Peripherals (e.g., Printers, Monitors, Keyboards, Mice, Scanners)</li>
+<li>Components (e.g., Motherboards, CPUs, Graphics Cards, Sound Cards)</li>
+<li>Mass Storage (e.g., Hard Disk Drives, Floppy Disks, Magnetic Tapes, SSDs)</li>
+</ul>
+</li>
+<li>If Category = Publications:
+<ul>
+<li>Books (e.g., Textbooks, Manuals, Technical Guides)</li>
+<li>Magazines (e.g., Trade Publications, Academic Journals, Popular Science)</li>
+</ul>
+</li>
+<li><strong>Further Detail:</strong> The list of subcategories should be configurable by authorized users.</li>
+</ul>
+</li>
+<li><strong>Detailed Description:</strong> A comprehensive textual description of the object, including its main features, history, and historical significance.
+<ul>
+<li><strong>Further Detail:</strong> Consider allowing rich text formatting or the ability to link to external resources for more information.</li>
+</ul>
+</li>
+<li><strong>Manufacturer/Author:</strong> The name of the manufacturer (for hardware) or the author/publisher (for publications).
+<ul>
+<li><strong>Further Detail:</strong> Include fields for both manufacturer and model for hardware, and author, publisher, and editor for publications.</li>
+</ul>
+</li>
+<li><strong>Model/Serial Number/ISBN:</strong> Specific information to uniquely identify the object (e.g., computer model, serial number, book/magazine ISBN).
+<ul>
+<li><strong>Further Detail:</strong> Make these fields conditionally required based on the category and subcategory (e.g., serial number might be mandatory for computers but optional for books).</li>
+</ul>
+</li>
+<li><strong>Date of Production/Publication:</strong> The date when the object was produced or published.
+<ul>
+<li><strong>Further Detail:</strong> Allow for different levels of precision (e.g., year only, month and year, full date).</li>
+</ul>
+</li>
+<li><strong>Condition:</strong> An assessment of the current state of the object (e.g., Excellent, Good, Fair, Poor, Needs Restoration).
+<ul>
+<li><strong>Further Detail:</strong> Consider using a controlled vocabulary for condition ratings and allowing for more detailed condition notes.</li>
+</ul>
+</li>
+<li><strong>Current Location:</strong> The precise indication of the object's physical location within the museum (e.g., Storage Room A, Display Case 1, Loaned Out).
+<ul>
+<li><strong>Further Detail:</strong> Implement a system for managing locations within the museum.</li>
+</ul>
+</li>
+<li><strong>Notes/Observations:</strong> A free-text field for adding further information or annotations about the object.</li>
+<li><strong>Images/Multimedia Files:</strong> The ability to attach images and other multimedia files (e.g., scans, videos) related to the object.
+<ul>
+<li><strong>Further Detail:</strong> Specify supported file formats and maximum file sizes. Consider the need for image resizing and thumbnail generation.</li>
+</ul>
+</li>
+</ul>
+<h4 id="312-viewing-and-editing-an-object">3.1.2 Viewing and Editing an Object</h4>
+<p>The application must allow authorized users to view all details of an existing object and modify its information, with the exception of the Unique Identifier (which should be immutable to ensure data integrity).</p>
+<ul>
+<li><strong>Further Detail:</strong> Implement a clear and user-friendly interface for viewing and editing object details. Consider using tabs or sections to organize the information. Implement an audit log to track changes made to object records, including the user, timestamp, and fields modified. Consider version history to revert to previous versions of the object record. Implement granular permissions to control which users can view and edit specific fields.</li>
+</ul>
+<h4 id="313-deleting-an-object">3.1.3 Deleting an Object</h4>
+<p>The application must allow authorized users to delete an object from the collection. This action should be protected to prevent accidental deletions (e.g., via a confirmation prompt).</p>
+<ul>
+<li><strong>Further Detail:</strong> Instead of permanent deletion, consider implementing a &quot;Mark as Inactive&quot; or &quot;Archived&quot; status. This allows for maintaining a record of all objects that were once part of the collection. If permanent deletion is necessary, ensure it requires a high level of authorization and potentially a reason for deletion. Consider the impact of deleting an object on associated exhibit groupings and acquisitions.</li>
+</ul>
+<h3 id="32-category-management">3.2 Category Management</h3>
+<p>This section describes the functionalities related to the management of object categories and subcategories.</p>
+<h4 id="321-viewing-categories">3.2.1 Viewing Categories</h4>
+<p>The application must display the main categories (Hardware, Publications) and their respective subcategories in a clear and organized manner.</p>
+<h4 id="322-adding-new-subcategories">3.2.2 Adding New Subcategories</h4>
+<p>The application must allow authorized users to add new subcategories within existing categories (e.g., adding the subcategory &quot;Workstation&quot; under &quot;Computer&quot;).</p>
+<ul>
+<li><strong>Further Detail:</strong> Consider the possibility of creating a hierarchical structure for categories and subcategories (e.g., Hardware -&gt; Computer -&gt; Desktop -&gt; Workstation). Implement validation to ensure that subcategory names are unique within their parent category.</li>
+</ul>
+<h4 id="323-modifying-subcategories">3.2.3 Modifying Subcategories</h4>
+<p>The application must allow authorized users to modify the name of existing subcategories.</p>
+<ul>
+<li><strong>Further Detail:</strong> Consider the impact of renaming a subcategory on the objects already assigned to it. The system should automatically update the objects accordingly.</li>
+</ul>
+<h4 id="324-deleting-subcategories">3.2.4 Deleting Subcategories</h4>
+<p>The application must allow authorized users to delete existing subcategories, only if there are no objects currently assigned to that subcategory.</p>
+<ul>
+<li><strong>Further Detail:</strong> Provide a clear warning message if there are objects associated with the subcategory being deleted. Consider the option to reassign objects to a different subcategory before allowing deletion.</li>
+</ul>
+<h3 id="33-exhibit-grouping-management">3.3 Exhibit Grouping Management</h3>
+<p>This section describes the functionalities related to the creation and management of exhibit groupings.</p>
+<h4 id="331-creating-a-new-exhibit-grouping">3.3.1 Creating a New Exhibit Grouping</h4>
+<p>The application must allow authorized users to create a new exhibit grouping, providing the following information:</p>
+<ul>
+<li><strong>Grouping Name:</strong> A descriptive name for the grouping (e.g., &quot;The Personal Computer Revolution&quot;, &quot;History of Mass Storage&quot;).</li>
+<li><strong>Grouping Description:</strong> A brief description of the theme or concept behind the grouping.</li>
+<li><strong>Included Objects:</strong> The ability to select one or more existing objects from the collection to include in the grouping. A single object can be included in multiple exhibit groupings.
+<ul>
+<li><strong>Further Detail:</strong> Provide a user-friendly interface for selecting objects, potentially allowing filtering by category or other criteria.</li>
+</ul>
+</li>
+</ul>
+<h4 id="332-viewing-an-exhibit-grouping">3.3.2 Viewing an Exhibit Grouping</h4>
+<p>The application must display the details of an exhibit grouping, including its name, description, and the list of objects it contains.</p>
+<h4 id="333-modifying-an-exhibit-grouping">3.3.3 Modifying an Exhibit Grouping</h4>
+<p>The application must allow authorized users to modify the name and description of an exhibit grouping, as well as add or remove objects from its composition.</p>
+<ul>
+<li><strong>Further Detail:</strong> Implement a mechanism to easily add or remove objects from the grouping. Consider the ability to reorder objects within the grouping for display purposes (if relevant).</li>
+</ul>
+<h4 id="334-deleting-an-exhibit-grouping">3.3.4 Deleting an Exhibit Grouping</h4>
+<p>The application must allow authorized users to delete an exhibit grouping. Deleting a grouping does not delete the objects contained within it.</p>
+<h3 id="34-acquisition-management">3.4 Acquisition Management</h3>
+<p>This section describes the functionalities related to the recording and management of new object acquisitions.</p>
+<h4 id="341-registering-a-new-acquisition">3.4.1 Registering a New Acquisition</h4>
+<p>The application must allow authorized users to register a new acquisition, including the following information:</p>
+<ul>
+<li><strong>Acquisition Date:</strong> The date when the batch of objects was received.</li>
+<li><strong>Source of Acquisition:</strong> The indication of the origin of the objects (e.g., Donation, Purchase, Bequest).
+<ul>
+<li><strong>Further Detail:</strong> Consider linking to a separate module for managing donors or vendors, including their contact information.</li>
+</ul>
+</li>
+<li><strong>Lot Description:</strong> A general description of the batch of objects acquired.</li>
+<li><strong>Acquired Objects:</strong> The ability to add one or more collection objects to this acquisition. When creating a new object, it should be possible to associate it with an existing acquisition.
+<ul>
+<li><strong>Further Detail:</strong> Allow for the possibility of adding objects to an acquisition at a later stage, as they are cataloged.</li>
+</ul>
+</li>
+<li><strong>Acquisition Notes:</strong> Any additional notes or information related to the acquisition (e.g., conditions of donation, purchase price).</li>
+<li><strong>Condition Upon Arrival (Optional):</strong> A general assessment of the condition of the lot upon arrival.</li>
+<li><strong>Appraisal Information (Optional):</strong> Details about any appraisals conducted on the acquired objects.</li>
+</ul>
+<h4 id="342-viewing-an-acquisition">3.4.2 Viewing an Acquisition</h4>
+<p>The application must display the details of an acquisition, including the date, source, description, and the list of acquired objects.</p>
+<h4 id="343-modifying-an-acquisition">3.4.3 Modifying an Acquisition</h4>
+<p>The application must allow authorized users to modify the information related to an acquisition, including the ability to add or remove acquired objects (in cases where these are cataloged later).</p>
+<h4 id="344-deleting-an-acquisition">3.4.4 Deleting an Acquisition</h4>
+<p>The application must allow authorized users to delete an acquisition record. This action should be protected to prevent accidental deletions.</p>
+<ul>
+<li><strong>Further Detail:</strong> Consider the implications of deleting an acquisition on the associated objects. The system might need to provide options for handling these objects (e.g., disassociating them from the deleted acquisition). It's generally good practice to archive acquisitions rather than permanently deleting them to maintain a historical record.</li>
+</ul>
+<h3 id="35-search-and-filtering-functionalities">3.5 Search and Filtering Functionalities</h3>
+<p>The application must offer powerful search and filtering functionalities to allow users to quickly locate desired objects.</p>
+<h4 id="351-free-text-search">3.5.1 Free Text Search</h4>
+<p>The ability to perform searches by entering keywords that will be searched across all textual fields of the objects (name, description, manufacturer, model, notes, etc.).</p>
+<ul>
+<li><strong>Further Detail:</strong> Implement indexing to improve search performance. Consider supporting advanced search syntax (e.g., boolean operators, wildcard characters, phrase searching).</li>
+</ul>
+<h4 id="352-filter-by-category-and-subcategory">3.5.2 Filter by Category and Subcategory</h4>
+<p>The ability to filter objects based on the selected category (Hardware, Publications) and subcategory.</p>
+<h4 id="353-filter-by-other-fields">3.5.3 Filter by Other Fields</h4>
+<p>The ability to filter objects based on other specific fields, such as:</p>
+<ul>
+<li>Condition</li>
+<li>Current Location</li>
+<li>Manufacturer/Author</li>
+<li>Date of Production/Publication (allow for date ranges)</li>
+<li>Membership in an Exhibit Grouping (search for objects within a specific grouping)</li>
+<li>Membership in an Acquisition (search for objects from a specific acquisition)</li>
+<li><strong>Further Detail:</strong> Allow for combining multiple filters to narrow down search results.</li>
+</ul>
+<h4 id="354-saving-searches-optional">3.5.4 Saving Searches (Optional)</h4>
+<p>The ability to save frequently used search queries for quick re-execution in the future.</p>
+<h3 id="36-reporting-functionalities-optional">3.6 Reporting Functionalities (Optional)</h3>
+<p>The application could include functionalities to generate reports on the collection, such as:</p>
+<ul>
+<li>Complete list of all objects in the collection.</li>
+<li>List of objects by category and subcategory.</li>
+<li>List of objects belonging to a specific exhibit grouping.</li>
+<li>List of objects acquired within a specific date range.</li>
+<li>Statistics on the condition of objects.</li>
+<li>Inventory reports for specific locations.</li>
+<li>Reports on recently added or modified objects.</li>
+<li><strong>Further Detail:</strong> Consider allowing users to customize report parameters and export reports in various formats (e.g., CSV, PDF).</li>
+</ul>
+<h2 id="4-non-functional-requirements-considerations">4. Non-Functional Requirements (Considerations)</h2>
+<p>While this document focuses on functional requirements, it is important to also consider some non-functional aspects:</p>
+<ul>
+<li><strong>Usability:</strong> The application should be intuitive and easy to use for users with varying levels of technical expertise. The user interface should be well-designed and user-friendly. Provide clear navigation and helpful instructions or tooltips. Consider user training needs.</li>
+<li><strong>Performance:</strong> The application should be responsive and ensure fast loading times, especially for search and display operations. Search results should be returned within an acceptable timeframe (e.g., under 3 seconds). The system should be able to handle a growing number of objects without significant performance degradation.</li>
+<li><strong>Security:</strong> Access to the application and the ability to modify and delete data should be protected through a robust authentication and authorization system. Implement user roles and permissions to control access to different functionalities. Consider data encryption for sensitive information and maintain audit logs of user activity.</li>
+<li><strong>Scalability:</strong> The application architecture should be designed to handle a growing number of objects and users over time. The system should be easily scalable to accommodate future expansion of the museum's collection and user base.</li>
+<li><strong>Maintainability:</strong> The application code should be well-structured, documented, and adhere to coding standards to facilitate maintenance and updates. Use a modular design to make it easier to modify or add new features.</li>
+</ul>
+<h2 id="5-data-model-conceptual">5. Data Model (Conceptual)</h2>
+<p>Below is a conceptual representation of the main entities and their relationships:</p>
+<ul>
+<li><strong>Object:</strong> Contains detailed information about each individual item in the collection.
+<ul>
+<li>Attributes: Unique Identifier (Primary Key), Name/Title, Category (Foreign Key referencing Category), Subcategory (Foreign Key referencing Subcategory), Description, Manufacturer/Author, Model/Serial Number/ISBN, Date of Production/Publication, Condition, Current Location (Foreign Key referencing Location), Notes, Multimedia Links.</li>
+<li>Relationships:
+<ul>
+<li>Many-to-Many with Exhibit Grouping (through a linking table: Object_ExhibitGrouping).</li>
+<li>Many-to-One with Acquisition (Foreign Key referencing Acquisition).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Category:</strong> Defines the main categories of objects (Hardware, Publications).
+<ul>
+<li>Attributes: Category ID (Primary Key), Name.</li>
+<li>Relationships: One-to-Many with Subcategory.</li>
+</ul>
+</li>
+<li><strong>Subcategory:</strong> Defines the subcategories within the categories (Computer, Peripherals, Books, Magazines, etc.).
+<ul>
+<li>Attributes: Subcategory ID (Primary Key), Category ID (Foreign Key referencing Category), Name.</li>
+<li>Relationships: Many-to-One with Category, One-to-Many with Object.</li>
+</ul>
+</li>
+<li><strong>Exhibit Grouping:</strong> Represents a conceptual grouping of objects for exhibition purposes.
+<ul>
+<li>Attributes: Grouping ID (Primary Key), Name, Description.</li>
+<li>Relationships: Many-to-Many with Object (through a linking table: Object_ExhibitGrouping).</li>
+</ul>
+</li>
+<li><strong>Acquisition:</strong> Records information related to the entry of object lots into the collection.
+<ul>
+<li>Attributes: Acquisition ID (Primary Key), Acquisition Date, Source, Description, Notes, Condition Upon Arrival, Appraisal Information.</li>
+<li>Relationships: One-to-Many with Object.</li>
+</ul>
+</li>
+<li><strong>Location (Optional):</strong> Represents the physical locations within the museum.
+<ul>
+<li>Attributes: Location ID (Primary Key), Name, Description.</li>
+<li>Relationships: One-to-Many with Object.</li>
+</ul>
+</li>
+<li><strong>User (Conceptual):</strong> Represents users of the application with different roles and permissions.
+<ul>
+<li>Attributes: User ID (Primary Key), Username, Password, Role.</li>
+<li>Relationships: Many-to-Many with Permissions (through a linking table: User_Permissions).</li>
+</ul>
+</li>
+</ul>
+<p>This document provides a foundation for the design and development of the informatics museum collection management application. Further details and technical specifications will be defined in subsequent project phases.</p>
+
+</body>
+</html>
