@@ -3,11 +3,11 @@ const MANIFEST = 'flutter-app-manifest';
 const TEMP = 'flutter-temp-cache';
 const CACHE_NAME = 'flutter-app-cache';
 
-const RESOURCES = {"flutter_bootstrap.js": "2f8841d643f0a99edecf5145d6194105",
+const RESOURCES = {"flutter_bootstrap.js": "34ab57e0c22a59d820bb235b238dddd7",
 "version.json": "45556af4c2e85eb546384ede57c099e3",
 "index.html": "46a3512046f91cd12c558eacf7af658d",
 "/": "46a3512046f91cd12c558eacf7af658d",
-"main.dart.js": "b9c4efc1c776686886b1e297c5e67bb2",
+"main.dart.js": "fc48c32014152ba85d441a4a8242f74b",
 "flutter.js": "76f08d47ff9f5715220992f993002504",
 "func.html": "23945d8de31d6cf3dfcd289fb8722555",
 "favicon.png": "5dcef449791fa27946b3d35ad8803796",
@@ -23,7 +23,7 @@ const RESOURCES = {"flutter_bootstrap.js": "2f8841d643f0a99edecf5145d6194105",
 "assets/packages/cupertino_icons/assets/CupertinoIcons.ttf": "33b7d9392238c04c131b6ce224e13711",
 "assets/shaders/ink_sparkle.frag": "ecc85a2e95f5e9f53123dcaf8cb9b6ce",
 "assets/AssetManifest.bin": "87e58a188b784f2e79ae867aa52ac7d5",
-"assets/fonts/MaterialIcons-Regular.otf": "1bed0200c3a7c6054f37eb0c63ccd258",
+"assets/fonts/MaterialIcons-Regular.otf": "23ff8606601e325dcf750cb823a8029b",
 "assets/assets/images/knuth_book.png": "b6ea589fdd809abfbfe58ce99b18738e",
 "assets/assets/images/macintosh.jpg": "e6258b873ad3b426e4a2bf04e1d45e83",
 "assets/assets/images/byte_magazine.jpg": "69cca8cd2e6c9b0a9f23b995e4a4d3e5",
